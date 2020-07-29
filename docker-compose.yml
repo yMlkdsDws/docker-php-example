@@ -5,7 +5,6 @@ services:
     container_name: blog-www
     volumes:
       - ./docker/nginx/blog.conf:/etc/nginx/conf.d/default.conf
-      - ./blog:/var/www
     depends_on:
       - app
     ports:
