@@ -1,0 +1,26 @@
+version: "3"
+services:
+  www:
+    image: nginx
+    container_name: blog-www
+    volumes:
+      - ./docker/nginx/blog.conf:/etc/nginx/conf.d/blog.conf
+    depends_on:
+      - app
+    ports:
+      - 8080:80
+  app:
+    image: php:7.2-fpm
+    container_name: blog-app
+    volumes:
+      - ./blog:/var/www
+  db:
+    image: mysql:5.7
+    container_name: blog-db
+    environment:
+      MYSQL_DATABASE: blog
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      TZ: "Asia/Tokyo"
+    ports:
+      - 13306:3306
